@@ -51,7 +51,7 @@ let
 
   copyToRegistry = image: pkgs.writeShellScriptBin "copy-to-registry" ''
     echo "Copy to Docker registry image ${image.imageName}:${image.imageTag}"
-    ${skopeo-nix2container}/bin/skopeo --insecure-policy copy nix:${image} docker://${image.imageName}:${image.imageTag} $@
+    ${skopeo-nix2container}/bin/skopeo --insecure-policy copy --dest-tls-verify=false nix:${image} docker://${image.imageName}:${image.imageTag} $@
   '';
 
   copyTo = image: pkgs.writeShellScriptBin "copy-to" ''
